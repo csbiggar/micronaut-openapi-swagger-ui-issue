@@ -1,6 +1,6 @@
 ## Micronaut OpenAPI upgrade stops generating swaggerUI
 
-ref issue: [micronaut-openapi/issues/994](https://github.com/micronaut-projects/micronaut-openapi/issues/994
+ref issue: [micronaut-openapi/issues/994](https://github.com/micronaut-projects/micronaut-openapi/issues/994)
 
 On upgrade from `io.micronaut.openapi:micronaut-openapi:4.8.6` to `io.micronaut.openapi:micronaut-openapi:4.8.7`, 
 swagger-ui is no longer generated. 
