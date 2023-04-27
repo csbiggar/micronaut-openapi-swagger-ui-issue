@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     val kotlinVersion = "1.8.20"
     id("org.jetbrains.kotlin.jvm") version kotlinVersion
@@ -15,36 +17,35 @@ repositories {
 }
 
 dependencies {
-    kapt("io.micronaut:micronaut-http-validation")
     implementation("io.micronaut:micronaut-http-client")
     implementation("io.micronaut:micronaut-jackson-databind")
     implementation("io.micronaut.kotlin:micronaut-kotlin-runtime")
-    implementation("jakarta.annotation:jakarta.annotation-api")
-    runtimeOnly("ch.qos.logback:logback-classic")
     implementation("io.micronaut:micronaut-validation")
-
+    runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("com.fasterxml.jackson.module:jackson-module-kotlin")
 
+    // Openapi
+    implementation("io.swagger.core.v3:swagger-annotations:2.2.9")
+    kapt("io.micronaut.openapi:micronaut-openapi:4.8.6")
 }
 
-
 application {
-    mainClass.set("example.micronaut.ApplicationKt")
+    mainClass.set("example.micronaut.Application")
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("11")
 }
 
 tasks {
-    compileKotlin {
+    withType<KotlinCompile> {
         kotlinOptions {
             jvmTarget = "11"
+            javaParameters = true
         }
     }
-    compileTestKotlin {
-        kotlinOptions {
-            jvmTarget = "11"
-        }
+
+    withType<JavaCompile> {
+        targetCompatibility = "11"
     }
 }
 
